@@ -150,7 +150,6 @@ create table apolice(
 	foreign key (cnpj_seguradora) references seguradora(cnpj)
 );
 
-
 	
 insert into pessoa (cpf,rg, endereco, datanascimento) values('cpf1', 'rg1','rua 1','1999-12-08');
 insert into pessoa (cpf,rg, endereco, datanascimento) values('cpf2', 'rg2','rua 2','1998-12-08');
@@ -336,10 +335,6 @@ insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, r
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (9, 1400.00, 2020, 'cnpj9', 'renavam9');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (10, 1500.00, 2021, 'cnpj10', 'renavam10');
 
-UPDATE apolice
-SET 
-    vigencia_ano = 2020
-WHERE renavam_veiculo = 'renavam9';
 --Consultas
 
 
@@ -382,11 +377,25 @@ WHERE apolice.vigencia_ano >= EXTRACT(YEAR FROM CURRENT_DATE);
 
 
 --consulta 5
+-- Retorna a latitude e longitude de inicio e o fim de uma corrida.
+SELECT
+    c.nro_corrida,
+    c.destino,
+    lc_inicio.latitude AS latitude_inicio,
+    lc_inicio.longitude AS longitude_inicio,
+    lc_fim.latitude AS latitude_fim,
+    lc_fim.longitude AS longitude_fim
+FROM corrida c
+JOIN localizacaoveiculo lc_inicio ON c.nro_corrida = lc_inicio.nro_corrida
+JOIN localizacaoveiculo lc_fim ON c.nro_corrida = lc_fim.nro_corrida
+WHERE lc_inicio.id_localizacao = (
+    SELECT MIN(id_localizacao) FROM localizacaoveiculo WHERE nro_corrida = c.nro_corrida
+)
+AND lc_fim.id_localizacao = (
+    SELECT MAX(id_localizacao) FROM localizacaoveiculo WHERE nro_corrida = c.nro_corrida
+);
 
-
-
-
-
+--consulta 6
 
 
 
