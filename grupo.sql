@@ -124,20 +124,36 @@ create table promocao(
     data_inicio date,
     data_fim date
 );
+create table statuspagamento(
+id_status int,
+tipo_status varchar(20),
+primary key (id_status)
+
+);
+create table metodopagamento(
+	id_pagamento int,
+	tipo_pagamento varchar(30),
+	primary key (id_pagamento)
+);
 
 create table pagamentocorrida(
    	cpf_passageiro varchar(11),
     nro_corrida int,
     valor float,
     codigo_promocao varchar(20),
-    metodo_pagamento varchar(50),
-    status_pagamento varchar(20), -- Pendente, Concluído, Cancelado, etc.
+    metodo_pagamento int,
+    status_pagamento int,
     data_pagamento timestamp,
     primary key (cpf_passageiro, nro_corrida),
     foreign key (nro_corrida) references corrida(nro_corrida),
     foreign key (codigo_promocao) references promocao(codigo),
+    foreign key (status_pagamento) references statuspagamento(id_status),
+    foreign key (metodo_pagamento) references metodopagamento(id_pagamento),
     foreign key (cpf_passageiro) references passageiro(cpf)
 );
+
+
+
 
 create table apolice(
 	nr_apolice int,
@@ -282,11 +298,6 @@ insert into suporteatendente(nro_corrida, cpf) values(7, 'cpf2');
 insert into suporteatendente(nro_corrida, cpf) values(8, 'cpf2');
 insert into suporteatendente(nro_corrida, cpf) values(9, 'cpf6');
 insert into suporteatendente(nro_corrida, cpf) values(10, 'cpf11');
--- Inserção na tabela suporteatendente
-INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (1, 'cpf1');
-INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (2, 'cpf2');
-INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (3, 'cpf3');
-
 
 -- Inserção na tabela tipos_avaliador
 INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(1, 'Passageiro');
@@ -311,11 +322,16 @@ INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, l
 INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod1', 'Desconto 10%', 10.0, '2023-01-01', '2023-01-31');
 INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod2', 'Desconto 20%', 20.0, '2023-02-01', '2023-02-28');
 
+insert into statuspagamento (id_status,tipo_status) values (1,'pendente');
+insert into statuspagamento(id_status,tipo_status) values (2,'concluido');
 
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (1,'Cartão de Credito');
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (2,'Cartão de Débito');
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (3,'Dinheiro');
 -- Inserção na tabela pagamentocorrida
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 1, 30.0, 'cod1', 'Cartão de Crédito', 'Concluído', '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 2, 25.0, 'cod2', 'Dinheiro', 'Pendente', NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 3, 15.0, NULL, 'Cartão de Débito', 'Concluído', '2023-01-03 14:30:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 2, 25.0, 'cod2', 3, 2, NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 3, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
 
 
 
@@ -396,8 +412,24 @@ AND lc_fim.id_localizacao = (
 );
 
 --consulta 6
+--Dado que a plataforma aceita somente carros com no maximo 10 anos de uso 
+--retorne os carros em ordem do mais proximos do tempo de vencimento
+SELECT
+    renavam,
+    marca,
+    modelo,
+    ano,
+    EXTRACT(YEAR FROM AGE(NOW(), data_compra::timestamp)) AS idade_carro
+FROM
+    veiculo
+WHERE
+    EXTRACT(YEAR FROM AGE(NOW(), data_compra::timestamp)) <= 10
+ORDER BY
+    idade_carro DESC;
 
-
+--consulta 7
+   
+   
 
 
 
