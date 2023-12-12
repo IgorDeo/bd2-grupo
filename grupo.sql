@@ -150,9 +150,6 @@ create table apolice(
 	foreign key (cnpj_seguradora) references seguradora(cnpj)
 );
 
-select * from pessoa;
-
-delete from pessoa;
 
 insert into tipos_avaliador(id_tipo, descricao) values (1, 'Motorista');
 insert into tipos_avaliador(id_tipo, descricao) values (2, 'Passageiro');
