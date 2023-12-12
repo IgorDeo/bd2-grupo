@@ -150,12 +150,8 @@ create table apolice(
 	foreign key (cnpj_seguradora) references seguradora(cnpj)
 );
 
-select * from pessoa;
 
-delete from pessoa;
 
-insert into tipos_avaliador(id_tipo, descricao) values (1, 'Motorista');
-insert into tipos_avaliador(id_tipo, descricao) values (2, 'Passageiro');
 	
 insert into pessoa (cpf,rg, endereco, datanascimento) values('cpf1', 'rg1','rua 1','1999-12-08');
 insert into pessoa (cpf,rg, endereco, datanascimento) values('cpf2', 'rg2','rua 2','1998-12-08');
@@ -288,6 +284,43 @@ insert into suporteatendente(nro_corrida, cpf) values(7, 'cpf2');
 insert into suporteatendente(nro_corrida, cpf) values(8, 'cpf2');
 insert into suporteatendente(nro_corrida, cpf) values(9, 'cpf6');
 insert into suporteatendente(nro_corrida, cpf) values(10, 'cpf11');
+-- Inserção na tabela suporteatendente
+INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (1, 'cpf1');
+INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (2, 'cpf2');
+INSERT INTO suporteatendente (nro_corrida, cpf) VALUES (3, 'cpf3');
+
+
+-- Inserção na tabela tipos_avaliador
+INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(1, 'Passageiro');
+INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(2, 'Motorista');
+
+
+-- Inserção na tabela avaliacaocorrida
+INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (1, 'cpf4', 1, 4, 'Ótima corrida');
+
+INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (2, 'cpf5', 2, 5, 'Motorista muito educado');
+
+INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (3, 'cpf6', 1, 3, 'Corrida com atraso');
+
+
+-- Inserção na tabela localizacaoveiculo
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (1, 1, '2023-01-01 10:00:00', -23.550520, -46.633308);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (2, 1, '2023-01-01 10:15:00', -23.545743, -46.636815);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (3, 2, '2023-01-02 08:30:00', -23.567383, -46.654244);
+
+
+-- Inserção na tabela promocao
+INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod1', 'Desconto 10%', 10.0, '2023-01-01', '2023-01-31');
+INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod2', 'Desconto 20%', 20.0, '2023-02-01', '2023-02-28');
+
+
+-- Inserção na tabela pagamentocorrida
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 1, 30.0, 'cod1', 'Cartão de Crédito', 'Concluído', '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 2, 25.0, 'cod2', 'Dinheiro', 'Pendente', NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 3, 15.0, NULL, 'Cartão de Débito', 'Concluído', '2023-01-03 14:30:00');
+
+
+
 
 
 
@@ -300,12 +333,56 @@ insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, r
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (5, 1600.00, 2023, 'cnpj5', 'renavam5');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (6, 1100.00, 2023, 'cnpj6', 'renavam6');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (7, 1200.00, 2023, 'cnpj7', 'renavam7');
-insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (8, 1300.00, 2023, 'cnpj8', 'renavam8');
-insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (9, 1400.00, 2023, 'cnpj9', 'renavam9');
-insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (10, 1500.00, 2023, 'cnpj10', 'renavam10');
+insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (8, 1300.00, 2022, 'cnpj8', 'renavam8');
+insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (9, 1400.00, 2020, 'cnpj9', 'renavam9');
+insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (10, 1500.00, 2021, 'cnpj10', 'renavam10');
+
+UPDATE apolice
+SET 
+    vigencia_ano = 2020
+WHERE renavam_veiculo = 'renavam9';
+--Consultas
 
 
+--Consulta 1
+--dado uma motorista quantas corridas ele fez e quanto faturou no total
 
+SELECT motorista.cpf, COUNT(DISTINCT c.nro_corrida) as quantidade_corridas, SUM(preco_passageiro)as faturamento_total
+FROM corrida c
+JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
+JOIN motorista ON c.cpf = motorista.cpf
+WHERE motorista.cpf = 'cpf3'
+GROUP BY motorista.cpf;
+
+--Consulta 2
+--dado um passageiro quantas corridas ele já fez e quanto ele gastou no total
+SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, SUM(c.preco_passageiro) as gasto_total
+FROM corrida c
+JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
+JOIN passageiro p ON p.cpf = passageirocorrida.cpf
+WHERE passageirocorrida.cpf = 'cpf2'
+GROUP BY p.cpf;
+
+
+--Consulta 3
+--Dado um passageiro qual a media de gasto dele em corridas
+SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, AVG(c.preco_passageiro) as media_valor_corrida
+FROM corrida c
+JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
+JOIN passageiro p ON p.cpf = passageirocorrida.cpf
+WHERE passageirocorrida.cpf = 'cpf2'
+GROUP BY p.cpf;
+
+
+--Consulta 4
+--todos o veiculos com seguro vigente
+SELECT renavam_veiculo, vigencia_ano
+FROM apolice
+JOIN veiculo ON veiculo.renavam = apolice.renavam_veiculo
+WHERE apolice.vigencia_ano >= EXTRACT(YEAR FROM CURRENT_DATE);
+
+
+--consulta 5
 
 
 
