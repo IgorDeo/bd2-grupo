@@ -428,8 +428,31 @@ ORDER BY
     idade_carro DESC;
 
 --consulta 7
+--dado uma corrida, quanto tempo ela durou, quanto cada passageiro pagou e qual foi o destino final
+SELECT
+    corrida.nro_corrida,
+    count(pc.cpf) AS quantidade_passageiro,
+    CASE
+WHEN hora_fim < hora_inicio THEN (hora_fim - hora_inicio) + INTERVAL '24
+hours'
+ ELSE (hora_fim - hora_inicio)
+ END AS duracao,
+    corrida.destino,
+ 	sum(corrida.preco_passageiro) as preco_corrida
+FROM
+    corrida 
+JOIN
+    passageirocorrida pc ON corrida.nro_corrida = pc.nro_corrida
+WHERE
+    corrida.nro_corrida = pc.nro_corrida
+group by corrida.nro_corrida
+order by corrida.nro_corrida;
    
+-- consulta 8
+--Todas as corridas que o pagamento foi concluidoi e foi utiliado um cupom de desconto
    
-
+   --consulta 9
+   
+   --consulta 10
 
 
