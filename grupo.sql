@@ -633,6 +633,18 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 --CRIAR TRIGGER E PROCEDURE PARA ATUALIZAR MEDIA DE AVALIACAO 
 
 
+CREATE OR REPLACE FUNCTION passageiroExiste(cpf_passageiro TEXT) RETURNS BOOLEAN AS $$
+DECLARE
+    existe BOOLEAN;
+BEGIN
+
+    SELECT EXISTS (SELECT 1 FROM passageiro WHERE cpf = cpf_passageiro) INTO existe;
+
+    RETURN existe;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 CREATE OR REPLACE FUNCTION criaCorrida(cpf_passageiros TEXT[], valor_passageiro FLOAT, destino TEXT) RETURNS VOID AS $$
 DECLARE
