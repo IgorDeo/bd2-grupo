@@ -714,6 +714,49 @@ begin
 end;
 $$;
 
+create or replace
+function validarSeguro()
+returns trigger as $$
+declare
+    renavam_carro  veiculo.renavam%type;
+	vigencia_apolice apolice.vigencia_ano%type;   	
+begin
+	renavam_carro := new.renavam;
+	
+select
+	vigencia_ano
+from
+	apolice
+	into vigencia_apolice
+where
+	apolice.renavam_veiculo = renavam_carro;
+
+if vigencia_apolice is null then
+        raise exception 'Nao podemos criar um carro sem uma apolice de seguro';
+
+elsif vigencia_apolice < EXTRACT(YEAR FROM CURRENT_DATE) then
+        raise exception 'Apolice expirada viculo precisa estar com a apolice em dia';
+end if;
+return new;
+end;
+$$ language plpgsql;
+
+
+
+CREATE or replace TRIGGER triggerValidarSeguro
+BEFORE INSERT OR UPDATE ON veiculo FOR EACH ROW
+EXECUTE PROCEDURE validarSeguro();
+
+--deve falhar pois nao existe apolice valida para o renavam deste veiculo
+insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam11', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
+
+--deve falhar pois o ano de vigencia e menor que a data atual
+insert into apolice (nr_apolice,valor_apolice,vigencia_ano,cnpj_seguradora,renavam_veiculo) values(13,2000,2020,'cnpj2','renavam22');
+insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam22', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
+
+--Deve funcionar pois a apolice esta com a vigencia em dia
+insert into apolice (nr_apolice,valor_apolice,vigencia_ano,cnpj_seguradora,renavam_veiculo) values(13,2000,2020,'cnpj2','renavam14');
+
 
 
 -- view 1:
