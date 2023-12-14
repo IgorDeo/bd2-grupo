@@ -109,13 +109,15 @@ create table avaliacaocorrida(
 );
 
 create table localizacaoveiculo(
-    id_localizacao int primary key,
+    id_localizacao int,
     nro_corrida int,
     momento_registro timestamp,
     latitude decimal(10, 8),
     longitude decimal(11, 8),
+    primary key (id_localizacao, nro_corrida),
     foreign key (nro_corrida) references corrida(nro_corrida)
 );
+
 
 create table promocao(
     codigo varchar(20) primary key,
@@ -145,11 +147,10 @@ create table pagamentocorrida(
     status_pagamento int,
     data_pagamento timestamp,
     primary key (cpf_passageiro, nro_corrida),
-    foreign key (nro_corrida) references corrida(nro_corrida),
     foreign key (codigo_promocao) references promocao(codigo),
     foreign key (status_pagamento) references statuspagamento(id_status),
     foreign key (metodo_pagamento) references metodopagamento(id_pagamento),
-    foreign key (cpf_passageiro) references passageiro(cpf)
+    foreign key (cpf_passageiro, nro_corrida) references passageirocorrida(cpf, nro_corrida)
 );
 
 
@@ -316,6 +317,13 @@ INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avalia
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (1, 1, '2023-01-01 10:00:00', -23.550520, -46.633308);
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (2, 1, '2023-01-01 10:15:00', -23.545743, -46.636815);
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (3, 2, '2023-01-02 08:30:00', -23.567383, -46.654244);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (1,3, '2023-01-01 10:00:00', -46.550520, -23.633308);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (2,3, '2023-01-01 10:15:00', -47.545743, -24.636815);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (3,3, '2023-01-02 08:30:00', -48.567383, -25.654244);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (4,3, '2023-01-01 10:00:00', -49.550520, -26.633308);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (5,3, '2023-01-01 10:15:00', -50.545743, -27.636815);
+INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (6, 3, '2023-01-02 08:30:00', -51.567383, -28.654244);
+
 
 
 -- Inserção na tabela promocao
@@ -328,10 +336,19 @@ insert into statuspagamento(id_status,tipo_status) values (2,'concluido');
 insert into metodopagamento (id_pagamento,tipo_pagamento) values (1,'Cartão de Credito');
 insert into metodopagamento (id_pagamento,tipo_pagamento) values (2,'Cartão de Débito');
 insert into metodopagamento (id_pagamento,tipo_pagamento) values (3,'Dinheiro');
--- Inserção na tabela pagamentocorrida
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 2, 25.0, 'cod2', 3, 2, NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 3, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
+
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf4', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf2', 2, 25.0, 'cod2', 3, 2, NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf6', 3, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 2, 25.0, 'cod2', 3, 2, NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 4, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 4, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf11', 4, 25.0, 'cod2', 3, 2, NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 5, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf4', 6, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 7, 25.0, 'cod2', 3, 2, NULL);
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 8, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
 
 
 
@@ -354,28 +371,42 @@ insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, r
 --Consultas
 
 
---Consulta 1
+--Consulta 1 e seus indices
 --dado uma motorista quantas corridas ele fez e quanto faturou no total
 
-SELECT motorista.cpf, COUNT(DISTINCT c.nro_corrida) as quantidade_corridas, SUM(preco_passageiro)as faturamento_total
+explain analyse SELECT motorista.cpf, COUNT(DISTINCT c.nro_corrida) as quantidade_corridas, SUM(preco_passageiro)as faturamento_total
 FROM corrida c
 JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
 JOIN motorista ON c.cpf = motorista.cpf
 WHERE motorista.cpf = 'cpf3'
 GROUP BY motorista.cpf;
 
---Consulta 2
+
+
+CREATE INDEX idx_passageirocorrida_nro_corrida ON passageirocorrida using hash(nro_corrida);
+C
+
+
+
+
+
+
+--Consulta 2 e seus indices
 --dado um passageiro quantas corridas ele já fez e quanto ele gastou no total
-SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, SUM(c.preco_passageiro) as gasto_total
+explain analyse SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, SUM(c.preco_passageiro) as gasto_total
 FROM corrida c
 JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
 JOIN passageiro p ON p.cpf = passageirocorrida.cpf
 WHERE passageirocorrida.cpf = 'cpf2'
 GROUP BY p.cpf;
 
+-- como estamos usando nro_corrida da tabela passageiro corrida novamente e ja criamos o indice na consulta anterior nao ciramos dnv
+CREATE INDEX idx_passageiro_corrida_cpf ON passageirocorrida using hash(cpf);
 
---Consulta 3
+
+--Consulta 3 e seus indices
 --Dado um passageiro qual a media de gasto dele em corridas
+--nao precisar criar novos indices pois ja temos os necessarios criados
 SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, AVG(c.preco_passageiro) as media_valor_corrida
 FROM corrida c
 JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
@@ -384,17 +415,19 @@ WHERE passageirocorrida.cpf = 'cpf2'
 GROUP BY p.cpf;
 
 
---Consulta 4
+--Consulta 4 e seus indices
 --todos o veiculos com seguro vigente
-SELECT renavam_veiculo, vigencia_ano
+explain analyse SELECT renavam_veiculo, vigencia_ano
 FROM apolice
 JOIN veiculo ON veiculo.renavam = apolice.renavam_veiculo
 WHERE apolice.vigencia_ano >= EXTRACT(YEAR FROM CURRENT_DATE);
 
+CREATE INDEX idx_apolice_vigencia_ano ON apolice USING BTREE(vigencia_ano);
+create index idx_apolice_renavam on apolice using hash(renavam_veiculo);
 
---consulta 5
+--consulta 5 e seus indices
 -- Retorna a latitude e longitude de inicio e o fim de uma corrida.
-SELECT
+explain analyse SELECT
     c.nro_corrida,
     c.destino,
     lc_inicio.latitude AS latitude_inicio,
@@ -411,7 +444,11 @@ AND lc_fim.id_localizacao = (
     SELECT MAX(id_localizacao) FROM localizacaoveiculo WHERE nro_corrida = c.nro_corrida
 );
 
---consulta 6
+create index idx_localizacaoveiculo_nro_corrida on localizacaoveiculo using hash(nro_corrida);
+
+
+
+--consulta 6 e seus indices
 --Dado que a plataforma aceita somente carros com no maximo 10 anos de uso 
 --retorne os carros em ordem do mais proximos do tempo de vencimento
 SELECT
@@ -426,10 +463,15 @@ WHERE
     EXTRACT(YEAR FROM AGE(NOW(), data_compra::timestamp)) <= 10
 ORDER BY
     idade_carro DESC;
+   
+CREATE INDEX idx_data_compra ON veiculo using btree(data_compra);
 
---consulta 7
+
+--consulta 7 e seus indices
 --dado uma corrida, quanto tempo ela durou, quanto cada passageiro pagou e qual foi o destino final
-SELECT
+-- para esta consulta ja temos os indices criados anteriormente
+
+explain analyse SELECT
     corrida.nro_corrida,
     count(pc.cpf) AS quantidade_passageiro,
     CASE
@@ -447,12 +489,103 @@ WHERE
     corrida.nro_corrida = pc.nro_corrida
 group by corrida.nro_corrida
 order by corrida.nro_corrida;
+
    
--- consulta 8
---Todas as corridas que o pagamento foi concluidoi e foi utiliado um cupom de desconto
-   
-   --consulta 9
-   
-   --consulta 10
+-- consulta 8 e seus indices
+--Todas as corridas que o pagamento foi concluidoi e foi utiliado um cupom de desconto\
+SELECT c.nro_corrida, sp.tipo_status, promocao.descricao, p.cpf_passageiro 
+FROM corrida c
+JOIN pagamentocorrida p ON c.nro_corrida = p.nro_corrida
+JOIN statuspagamento sp ON p.status_pagamento = sp.id_status
+JOIN promocao ON p.codigo_promocao = promocao.codigo
+WHERE p.status_pagamento = 2;
+
+create index idx_pagamentocorrida_nro_corrida on pagamentocorrida using hash(nro_corrida);
+create index idx_pagamentocorrida_id_status on pagamentocorrida using hash(status_pagamento);
+create index idx_pagamentocorrida_codigo on pagamentocorrida using hash(codigo_promocao);
 
 
+--consulta 9
+WITH MotoristaAvaliacao AS (
+    SELECT
+        m.cpf AS cpf_motorista,
+        AVG(ac.avaliacao) AS media_avaliacao
+    FROM
+        motorista m
+    JOIN avaliacaocorrida ac ON m.cpf = ac.cpf_avaliador
+    WHERE
+        ac.tipo_avaliador = 2
+    GROUP BY
+        m.cpf
+)
+SELECT
+    p.cpf,
+    p.nome,
+    ma.media_avaliacao,
+    COUNT(c.nro_corrida) AS total_corridas
+FROM
+    motorista p
+JOIN motorista m ON p.cpf = m.cpf
+JOIN corrida c ON m.cpf = c.cpf
+JOIN MotoristaAvaliacao ma ON m.cpf = ma.cpf_motorista
+GROUP BY
+    p.cpf, p.nome, ma.media_avaliacao
+ORDER BY
+    ma.media_avaliacao DESC
+LIMIT 3;
+
+
+
+
+--consulta 10
+
+
+
+
+
+
+
+
+
+
+--Procedures
+
+CREATE TRIGGER triggerVerificaCupom
+BEFORE INSERT OR UPDATE ON pagamentocorrida FOR EACH ROW
+EXECUTE PROCEDURE verificaCupom();
+
+
+CREATE OR REPLACE FUNCTION verificaCupom()
+RETURNS TRIGGER AS $$
+DECLARE
+    data_expiracao promocao.data_fim%TYPE;
+    numero_c pagamentocorrida.nro_corrida%TYPE;
+    cpf_p pagamentocorrida.cpf_passageiro%TYPE;
+BEGIN
+    numero_c := NEW.nro_corrida;
+    cpf_p := NEW.cpf_passageiro;
+
+    SELECT data_fim INTO data_expiracao
+    FROM promocao
+    JOIN pagamentocorrida pc ON pc.codigo_promocao = promocao.codigo
+    WHERE pc.nro_corrida = numero_c AND pc.cpf_passageiro = cpf_p;
+
+    IF data_expiracao IS NULL THEN
+        RAISE Exception 'Cupom inválido';
+    ELSIF data_expiracao < CURRENT_DATE THEN
+        RAISE exception 'Cupom expirado';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf5', 10, 15.0, 'cod2', 2, 1, '2023-01-03 14:30:00');
+
+ SELECT data_fim,  pc.codigo_promocao
+    FROM promocao
+    JOIN pagamentocorrida pc ON pc.codigo_promocao = promocao.codigo
+    WHERE pc.nro_corrida = 2 AND pc.cpf_passageiro = 'cpf3';
+   
+   select * from promocao;
+  
