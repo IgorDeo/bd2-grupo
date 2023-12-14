@@ -1,4 +1,4 @@
--- Trabalho em grupo
+-- trabalho em grupo
 
 create table pessoa (
 cpf char(11) primary key,
@@ -77,7 +77,7 @@ foreign key (nro_corrida) references corrida(nro_corrida)
 
 
 
--- Novas tabelas
+-- novas tabelas
 create table suporteatendente(
 nro_corrida int primary key,
 cpf char(11),
@@ -97,8 +97,8 @@ descricao varchar(15)
 create table avaliacaocorrida(
     nro_corrida int,
     cpf_avaliador char(11),
-    tipo_avaliador int, -- Passageiro ou Motorista
-    avaliacao int, -- Pode ser uma pontuação de 1 a 5, por exemplo
+    tipo_avaliador int, -- passageiro ou motorista
+    avaliacao int, -- pode ser uma pontuação de 1 a 5, por exemplo
     comentario text,
     primary key (nro_corrida, cpf_avaliador),
     foreign key (nro_corrida) references corrida(nro_corrida),
@@ -300,58 +300,58 @@ insert into suporteatendente(nro_corrida, cpf) values(8, 'cpf2');
 insert into suporteatendente(nro_corrida, cpf) values(9, 'cpf6');
 insert into suporteatendente(nro_corrida, cpf) values(10, 'cpf11');
 
--- Inserção na tabela tipos_avaliador
-INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(1, 'Passageiro');
-INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(2, 'Motorista');
+-- inserção na tabela tipos_avaliador
+insert into tipos_avaliador (id_tipo, descricao) values(1, 'passageiro');
+insert into tipos_avaliador (id_tipo, descricao) values(2, 'motorista');
 
 
--- Inserção na tabela avaliacaocorrida
-INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (1, 'cpf4', 1, 4, 'Ótima corrida');
-INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (2, 'cpf5', 2, 5, 'Passageiro muito educado');
-INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (3, 'cpf6', 1, 3, 'Corrida com atraso');
-INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (4, 'cpf12', 1, 3, 'Corrida com atraso');
+-- inserção na tabela avaliacaocorrida
+insert into avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) values (1, 'cpf4', 1, 4, 'ótima corrida');
+insert into avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) values (2, 'cpf5', 2, 5, 'passageiro muito educado');
+insert into avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) values (3, 'cpf6', 1, 3, 'corrida com atraso');
+insert into avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) values (4, 'cpf12', 1, 3, 'corrida com atraso');
 
 
--- Inserção na tabela localizacaoveiculo
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (1, 1, '2023-01-01 10:00:00', -23.550520, -46.633308);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (2, 1, '2023-01-01 10:15:00', -23.545743, -46.636815);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (3, 2, '2023-01-02 08:30:00', -23.567383, -46.654244);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (1,3, '2023-01-01 10:00:00', -46.550520, -23.633308);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (2,3, '2023-01-01 10:15:00', -47.545743, -24.636815);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (3,3, '2023-01-02 08:30:00', -48.567383, -25.654244);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (4,3, '2023-01-01 10:00:00', -49.550520, -26.633308);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (5,3, '2023-01-01 10:15:00', -50.545743, -27.636815);
-INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (6, 3, '2023-01-02 08:30:00', -51.567383, -28.654244);
+-- inserção na tabela localizacaoveiculo
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (1, 1, '2023-01-01 10:00:00', -23.550520, -46.633308);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (2, 1, '2023-01-01 10:15:00', -23.545743, -46.636815);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (3, 2, '2023-01-02 08:30:00', -23.567383, -46.654244);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (1,3, '2023-01-01 10:00:00', -46.550520, -23.633308);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (2,3, '2023-01-01 10:15:00', -47.545743, -24.636815);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (3,3, '2023-01-02 08:30:00', -48.567383, -25.654244);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (4,3, '2023-01-01 10:00:00', -49.550520, -26.633308);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (5,3, '2023-01-01 10:15:00', -50.545743, -27.636815);
+insert into localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) values (6, 3, '2023-01-02 08:30:00', -51.567383, -28.654244);
 
 
--- Inserção na tabela promocao
-INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod1', 'Desconto 10%', 10.0, '2023-01-01', '2023-01-31');
-INSERT INTO promocao (codigo, descricao, desconto, data_inicio, data_fim) VALUES ('cod2', 'Desconto 20%', 20.0, '2023-02-01', '2023-02-28');
+-- inserção na tabela promocao
+insert into promocao (codigo, descricao, desconto, data_inicio, data_fim) values ('cod1', 'desconto 10%', 10.0, '2023-01-01', '2023-01-31');
+insert into promocao (codigo, descricao, desconto, data_inicio, data_fim) values ('cod2', 'desconto 20%', 20.0, '2023-02-01', '2023-02-28');
 
 insert into statuspagamento (id_status,tipo_status) values (1,'pendente');
 insert into statuspagamento(id_status,tipo_status) values (2,'concluido');
 
-insert into metodopagamento (id_pagamento,tipo_pagamento) values (1,'Cartão de Credito');
-insert into metodopagamento (id_pagamento,tipo_pagamento) values (2,'Cartão de Débito');
-insert into metodopagamento (id_pagamento,tipo_pagamento) values (3,'Dinheiro');
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (1,'cartão de credito');
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (2,'cartão de débito');
+insert into metodopagamento (id_pagamento,tipo_pagamento) values (3,'dinheiro');
 
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf4', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf2', 2, 25.0, 'cod2', 3, 2, NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf6', 3, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 2, 25.0, 'cod2', 3, 2, NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 4, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf9', 4, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf11', 4, 25.0, 'cod2', 3, 2, NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf7', 5, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf4', 6, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 7, 25.0, 'cod2', 3, 2, NULL);
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 8, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
-
-
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf4', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf2', 2, 25.0, 'cod2', 3, 2, null);
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf6', 3, 15.0, null, 2, 1, '2023-01-03 14:30:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf3', 1, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf3', 2, 25.0, 'cod2', 3, 2, null);
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf8', 4, 15.0, null, 2, 1, '2023-01-03 14:30:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf9', 4, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf11', 4, 25.0, 'cod2', 3, 2, null);
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf7', 5, 15.0, null, 2, 1, '2023-01-03 14:30:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf4', 6, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf3', 7, 25.0, 'cod2', 3, 2, null);
+insert into pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) values ('cpf8', 8, 15.0, null, 2, 1, '2023-01-03 14:30:00');
 
 
--- Inserções para a tabela apolice
+
+
+-- inserções para a tabela apolice
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (1, 1500.00, 2023, 'cnpj1', 'renavam1');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (2, 1200.00, 2023, 'cnpj2', 'renavam2');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (3, 1300.00, 2023, 'cnpj3', 'renavam3');
@@ -363,73 +363,73 @@ insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, r
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (9, 1400.00, 2020, 'cnpj9', 'renavam9');
 insert into apolice (nr_apolice, valor_apolice, vigencia_ano, cnpj_seguradora, renavam_veiculo) values (10, 1500.00, 2021, 'cnpj10', 'renavam10');
 
---Consultas
+--consultas
 
 
---Consulta 1 e seus indices
+--consulta 1 e seus indices
 --dado uma motorista quantas corridas ele fez e quanto faturou no total
 
-explain analyse SELECT motorista.cpf, COUNT(DISTINCT c.nro_corrida) as quantidade_corridas, SUM(preco_passageiro)as faturamento_total
-FROM corrida c
-JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
-JOIN motorista ON c.cpf = motorista.cpf
-WHERE motorista.cpf = 'cpf3'
-GROUP BY motorista.cpf;
+explain analyse select motorista.cpf, count(distinct c.nro_corrida) as quantidade_corridas, sum(preco_passageiro)as faturamento_total
+from corrida c
+join passageirocorrida on c.nro_corrida = passageirocorrida.nro_corrida
+join motorista on c.cpf = motorista.cpf
+where motorista.cpf = 'cpf3'
+group by motorista.cpf;
 
-CREATE INDEX idx_passageirocorrida_nro_corrida ON passageirocorrida using hash(nro_corrida);
+create index idx_passageirocorrida_nro_corrida on passageirocorrida using hash(nro_corrida);
 
 
---Consulta 2 e seus indices
+--consulta 2 e seus indices
 --dado um passageiro quantas corridas ele já fez e quanto ele gastou no total
-explain analyse SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, SUM(c.preco_passageiro) as gasto_total
-FROM corrida c
-JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
-JOIN passageiro p ON p.cpf = passageirocorrida.cpf
-WHERE passageirocorrida.cpf = 'cpf2'
-GROUP BY p.cpf;
+explain analyse select p.cpf, count(c.nro_corrida) as quantidade_corridas, sum(c.preco_passageiro) as gasto_total
+from corrida c
+join passageirocorrida on c.nro_corrida = passageirocorrida.nro_corrida
+join passageiro p on p.cpf = passageirocorrida.cpf
+where passageirocorrida.cpf = 'cpf2'
+group by p.cpf;
 
 -- como estamos usando nro_corrida da tabela passageiro corrida novamente e ja criamos o indice na consulta anterior nao ciramos dnv
-CREATE INDEX idx_passageiro_corrida_cpf ON passageirocorrida using hash(cpf);
+create index idx_passageiro_corrida_cpf on passageirocorrida using hash(cpf);
 
 
---Consulta 3 e seus indices
---Dado um passageiro qual a media de gasto dele em corridas
+--consulta 3 e seus indices
+--dado um passageiro qual a media de gasto dele em corridas
 --nao precisar criar novos indices pois ja temos os necessarios criados
-SELECT p.cpf, COUNT(c.nro_corrida) as quantidade_corridas, AVG(c.preco_passageiro) as media_valor_corrida
-FROM corrida c
-JOIN passageirocorrida ON c.nro_corrida = passageirocorrida.nro_corrida
-JOIN passageiro p ON p.cpf = passageirocorrida.cpf
-WHERE passageirocorrida.cpf = 'cpf2'
-GROUP BY p.cpf;
+select p.cpf, count(c.nro_corrida) as quantidade_corridas, avg(c.preco_passageiro) as media_valor_corrida
+from corrida c
+join passageirocorrida on c.nro_corrida = passageirocorrida.nro_corrida
+join passageiro p on p.cpf = passageirocorrida.cpf
+where passageirocorrida.cpf = 'cpf2'
+group by p.cpf;
 
 
---Consulta 4 e seus indices
+--consulta 4 e seus indices
 --todos o veiculos com seguro vigente
-explain analyse SELECT renavam_veiculo, vigencia_ano
-FROM apolice
-JOIN veiculo ON veiculo.renavam = apolice.renavam_veiculo
-WHERE apolice.vigencia_ano >= EXTRACT(YEAR FROM CURRENT_DATE);
+explain analyse select renavam_veiculo, vigencia_ano
+from apolice
+join veiculo on veiculo.renavam = apolice.renavam_veiculo
+where apolice.vigencia_ano >= extract(year from current_date);
 
-CREATE INDEX idx_apolice_vigencia_ano ON apolice USING BTREE(vigencia_ano);
+create index idx_apolice_vigencia_ano on apolice using btree(vigencia_ano);
 create index idx_apolice_renavam on apolice using hash(renavam_veiculo);
 
 --consulta 5 e seus indices
--- Retorna a latitude e longitude de inicio e o fim de uma corrida.
-explain analyse SELECT
+-- retorna a latitude e longitude de inicio e o fim de uma corrida.
+explain analyse select
     c.nro_corrida,
     c.destino,
-    lc_inicio.latitude AS latitude_inicio,
-    lc_inicio.longitude AS longitude_inicio,
-    lc_fim.latitude AS latitude_fim,
-    lc_fim.longitude AS longitude_fim
-FROM corrida c
-JOIN localizacaoveiculo lc_inicio ON c.nro_corrida = lc_inicio.nro_corrida
-JOIN localizacaoveiculo lc_fim ON c.nro_corrida = lc_fim.nro_corrida
-WHERE lc_inicio.id_localizacao = (
-    SELECT MIN(id_localizacao) FROM localizacaoveiculo WHERE nro_corrida = c.nro_corrida
+    lc_inicio.latitude as latitude_inicio,
+    lc_inicio.longitude as longitude_inicio,
+    lc_fim.latitude as latitude_fim,
+    lc_fim.longitude as longitude_fim
+from corrida c
+join localizacaoveiculo lc_inicio on c.nro_corrida = lc_inicio.nro_corrida
+join localizacaoveiculo lc_fim on c.nro_corrida = lc_fim.nro_corrida
+where lc_inicio.id_localizacao = (
+    select min(id_localizacao) from localizacaoveiculo where nro_corrida = c.nro_corrida
 )
-AND lc_fim.id_localizacao = (
-    SELECT MAX(id_localizacao) FROM localizacaoveiculo WHERE nro_corrida = c.nro_corrida
+and lc_fim.id_localizacao = (
+    select max(id_localizacao) from localizacaoveiculo where nro_corrida = c.nro_corrida
 );
 
 create index idx_localizacaoveiculo_nro_corrida on localizacaoveiculo using hash(nro_corrida);
@@ -437,56 +437,56 @@ create index idx_localizacaoveiculo_nro_corrida on localizacaoveiculo using hash
 
 
 --consulta 6 e seus indices
---Dado que a plataforma aceita somente carros com no maximo 10 anos de uso 
+--dado que a plataforma aceita somente carros com no maximo 10 anos de uso 
 --retorne os carros em ordem do mais proximos do tempo de vencimento
-SELECT
+select
     renavam,
     marca,
     modelo,
     ano,
-    EXTRACT(YEAR FROM AGE(NOW(), data_compra::timestamp)) AS idade_carro
-FROM
+    extract(year from age(now(), data_compra::timestamp)) as idade_carro
+from
     veiculo
-WHERE
-    EXTRACT(YEAR FROM AGE(NOW(), data_compra::timestamp)) <= 10
-ORDER BY
-    idade_carro DESC;
+where
+    extract(year from age(now(), data_compra::timestamp)) <= 10
+order by
+    idade_carro desc;
    
-CREATE INDEX idx_data_compra ON veiculo using btree(data_compra);
+create index idx_data_compra on veiculo using btree(data_compra);
 
 
 --consulta 7 e seus indices
 --dado uma corrida, quanto tempo ela durou, quanto cada passageiro pagou e qual foi o destino final
 -- para esta consulta ja temos os indices criados anteriormente
 
-explain analyse SELECT
+explain analyse select
     corrida.nro_corrida,
-    count(pc.cpf) AS quantidade_passageiro,
-    CASE
-WHEN hora_fim < hora_inicio THEN (hora_fim - hora_inicio) + INTERVAL '24
+    count(pc.cpf) as quantidade_passageiro,
+    case
+when hora_fim < hora_inicio then (hora_fim - hora_inicio) + interval '24
 hours'
- ELSE (hora_fim - hora_inicio)
- END AS duracao,
+ else (hora_fim - hora_inicio)
+ end as duracao,
     corrida.destino,
  	sum(corrida.preco_passageiro) as preco_corrida
-FROM
+from
     corrida 
-JOIN
-    passageirocorrida pc ON corrida.nro_corrida = pc.nro_corrida
-WHERE
+join
+    passageirocorrida pc on corrida.nro_corrida = pc.nro_corrida
+where
     corrida.nro_corrida = pc.nro_corrida
 group by corrida.nro_corrida
 order by corrida.nro_corrida;
 
    
 -- consulta 8 e seus indices
---Todas as corridas que o pagamento foi concluidoi e foi utiliado um cupom de desconto\
-SELECT c.nro_corrida, sp.tipo_status, promocao.descricao, p.cpf_passageiro 
-FROM corrida c
-JOIN pagamentocorrida p ON c.nro_corrida = p.nro_corrida
-JOIN statuspagamento sp ON p.status_pagamento = sp.id_status
-JOIN promocao ON p.codigo_promocao = promocao.codigo
-WHERE p.status_pagamento = 2;
+--todas as corridas que o pagamento foi concluidoi e foi utiliado um cupom de desconto\
+select c.nro_corrida, sp.tipo_status, promocao.descricao, p.cpf_passageiro 
+from corrida c
+join pagamentocorrida p on c.nro_corrida = p.nro_corrida
+join statuspagamento sp on p.status_pagamento = sp.id_status
+join promocao on p.codigo_promocao = promocao.codigo
+where p.status_pagamento = 2;
 
 create index idx_pagamentocorrida_nro_corrida on pagamentocorrida using hash(nro_corrida);
 create index idx_pagamentocorrida_id_status on pagamentocorrida using hash(status_pagamento);
@@ -494,54 +494,54 @@ create index idx_pagamentocorrida_codigo on pagamentocorrida using hash(codigo_p
 
 
 --consulta 9
-WITH MotoristaAvaliacao AS (
-    SELECT
-        m.cpf AS cpf_motorista,
-        AVG(ac.avaliacao) AS media_avaliacao
-    FROM
+with motoristaavaliacao as (
+    select
+        m.cpf as cpf_motorista,
+        avg(ac.avaliacao) as media_avaliacao
+    from
         motorista m
-    JOIN avaliacaocorrida ac ON m.cpf = ac.cpf_avaliador
-    WHERE
+    join avaliacaocorrida ac on m.cpf = ac.cpf_avaliador
+    where
         ac.tipo_avaliador = 2
-    GROUP BY
+    group by
         m.cpf
 )
-SELECT
+select
     p.cpf,
     p.nome,
     ma.media_avaliacao,
-    COUNT(c.nro_corrida) AS total_corridas
-FROM
+    count(c.nro_corrida) as total_corridas
+from
     motorista p
-JOIN motorista m ON p.cpf = m.cpf
-JOIN corrida c ON m.cpf = c.cpf_motorista
-JOIN MotoristaAvaliacao ma ON m.cpf = ma.cpf_motorista
-GROUP BY
+join motorista m on p.cpf = m.cpf
+join corrida c on m.cpf = c.cpf_motorista
+join motoristaavaliacao ma on m.cpf = ma.cpf_motorista
+group by
     p.cpf, p.nome, ma.media_avaliacao
-ORDER BY
-    ma.media_avaliacao DESC
-LIMIT 3;
+order by
+    ma.media_avaliacao desc
+limit 3;
 
 
 
 
 --consulta 10: média de avaliacao de todos os motoristas
-SELECT
-    c.cpf_motorista AS cpf_motorista,
-    AVG(ac.avaliacao) AS media_avaliacao
-FROM
+select
+    c.cpf_motorista as cpf_motorista,
+    avg(ac.avaliacao) as media_avaliacao
+from
     corrida c
-JOIN
-    avaliacaocorrida ac ON c.nro_corrida = ac.nro_corrida
-                      AND ac.tipo_avaliador = 1 -- Assuming id_tipo '1' corresponds to Passageiro
-GROUP BY
+join
+    avaliacaocorrida ac on c.nro_corrida = ac.nro_corrida
+                      and ac.tipo_avaliador = 1 -- assuming id_tipo '1' corresponds to passageiro
+group by
     c.cpf_motorista;
    
  select * from avaliacaocorrida;   
 --procedure + trigger	
 
 create or replace
-function verificaCupom()
+function verificacupom()
 returns trigger as $$
 declare
     data_expiracao promocao.data_fim%type;
@@ -560,10 +560,10 @@ where
 	promocao.codigo = cod_promocao;
 
 if data_expiracao is null then
-        raise exception 'Cupom inválido';
+        raise exception 'cupom inválido';
 
-elsif data_expiracao < CURRENT_DATE then
-        raise exception 'Cupom expirado';
+elsif data_expiracao < current_date then
+        raise exception 'cupom expirado';
 end if;
 
 return new;
@@ -573,14 +573,14 @@ $$ language plpgsql;
 
 
 
-CREATE or replace TRIGGER triggerVerificaCupom
-BEFORE INSERT OR UPDATE ON pagamentocorrida FOR EACH ROW
-EXECUTE PROCEDURE verificaCupom();
+create or replace trigger triggerverificacupom
+before insert or update on pagamentocorrida for each row
+execute procedure verificacupom();
 
 --procedure + trigger
 
 create or replace
-function validaAvaliacao()()
+function validaavaliacao()()
 returns trigger as $$
 declare
     data_expiracao promocao.data_fim%type;
@@ -600,174 +600,174 @@ where
 	promocao.codigo = cod_promocao;
 
 if data_expiracao is null then
-        raise exception 'Cupom inválido';
+        raise exception 'cupom inválido';
 
-elsif data_expiracao < CURRENT_DATE then
-        raise exception 'Cupom expirado';
+elsif data_expiracao < current_date then
+        raise exception 'cupom expirado';
 end if;
 
 return new;
 end;
 
-CREATE or replace TRIGGER triggerValidaAvaliacao
-BEFORE INSERT OR UPDATE ON avaliacaocorrida FOR EACH ROW
-EXECUTE PROCEDURE validaAvaliacao();
+create or replace trigger triggervalidaavaliacao
+before insert or update on avaliacaocorrida for each row
+execute procedure validaavaliacao();
 
 	
-CREATE OR REPLACE FUNCTION passageiroExiste(cpf_passageiro TEXT) RETURNS BOOLEAN AS $$
-DECLARE
-    existe BOOLEAN;
-BEGIN
+create or replace function passageiroexiste(cpf_passageiro text) returns boolean as $$
+declare
+    existe boolean;
+begin
 
-    SELECT EXISTS (SELECT 1 FROM passageiro WHERE cpf = cpf_passageiro) INTO existe;
+    select exists (select 1 from passageiro where cpf = cpf_passageiro) into existe;
 
-    RETURN existe;
-END;
-$$ LANGUAGE plpgsql;
+    return existe;
+end;
+$$ language plpgsql;
 
 
-CREATE OR REPLACE FUNCTION criaCorrida(cpf_passageiros TEXT[], valor_passageiro FLOAT, destino TEXT) RETURNS VOID AS $$
-DECLARE
-    len_lista INT;
-    errs TEXT[] := '{}';
+create or replace function criacorrida(cpf_passageiros text[], valor_passageiro float, destino text) returns void as $$
+declare
+    len_lista int;
+    errs text[] := '{}';
     motorista_corrida motorista%rowtype;
-    nro_nova_corrida INT;
-BEGIN 
+    nro_nova_corrida int;
+begin 
     len_lista := array_length(cpf_passageiros, 1);
    
    	if len_lista > 4 then
-   		raise exception 'Uma corrida não pode ter mais de 4 passageiros';
+   		raise exception 'uma corrida não pode ter mais de 4 passageiros';
    	end if;
    
   	if len_lista = 0 or len_lista is null then
-   		raise exception 'Uma corrida precisa de pelo menos um passageiro';
+   		raise exception 'uma corrida precisa de pelo menos um passageiro';
    	end if;
 
 
-    -- Para cada CPF na lista de passageiros, verificar se o passageiro está cadastrado
-    FOR i IN 1..len_lista LOOP
-        IF NOT passageiroExiste(cpf_passageiros[i]) then
-            errs := errs || FORMAT('%s', cpf_passageiros[i]);
-        END IF;
-    END LOOP;
+    -- para cada cpf na lista de passageiros, verificar se o passageiro está cadastrado
+    for i in 1..len_lista loop
+        if not passageiroexiste(cpf_passageiros[i]) then
+            errs := errs || format('%s', cpf_passageiros[i]);
+        end if;
+    end loop;
 
-    -- Se algum deles não for passageiro, acontecerá um erro
-    IF array_length(errs, 1) > 0 THEN
-        RAISE EXCEPTION 'CPFs não encontrados: %', errs;
-    END IF;
+    -- se algum deles não for passageiro, acontecerá um erro
+    if array_length(errs, 1) > 0 then
+        raise exception 'cpfs não encontrados: %', errs;
+    end if;
 
-    -- Seleciona um motorista aleatoriamente para a corrida
-    SELECT * FROM motorista INTO motorista_corrida
-    ORDER BY RANDOM()
-    LIMIT 1;
-
-
-    INSERT INTO corrida (cpf_motorista, hora_inicio, preco_passageiro, data_inicio, destino)
-    VALUES (motorista_corrida.cpf, CURRENT_TIME, valor_passageiro, current_date, destino)
-    RETURNING nro_corrida INTO nro_nova_corrida;
-
-    FOR i IN 1..len_lista LOOP
-        INSERT INTO passageirocorrida (nro_corrida, cpf)
-        VALUES (nro_nova_corrida, cpf_passageiros[i]);
-    END LOOP;
+    -- seleciona um motorista aleatoriamente para a corrida
+    select * from motorista into motorista_corrida
+    order by random()
+    limit 1;
 
 
+    insert into corrida (cpf_motorista, hora_inicio, preco_passageiro, data_inicio, destino)
+    values (motorista_corrida.cpf, current_time, valor_passageiro, current_date, destino)
+    returning nro_corrida into nro_nova_corrida;
 
-    RAISE NOTICE 'Corrida nro: % criada com sucesso. Boa viagem!', nro_nova_corrida;
-
-
-END;
-$$ LANGUAGE plpgsql;
+    for i in 1..len_lista loop
+        insert into passageirocorrida (nro_corrida, cpf)
+        values (nro_nova_corrida, cpf_passageiros[i]);
+    end loop;
 
 
 
+    raise notice 'corrida nro: % criada com sucesso. boa viagem!', nro_nova_corrida;
 
 
--- Deve falhar pois cpf1 não é um passageiro
-DO $$
-BEGIN
-    PERFORM criaCorrida(ARRAY['cpf1', 'cpf1322', 'cpf14243', 'cpf12'], 50.00,'Universidade Federal Fluminense');
-END;
+end;
+$$ language plpgsql;
+
+
+
+
+
+-- deve falhar pois cpf1 não é um passageiro
+do $$
+begin
+    perform criacorrida(array['cpf1', 'cpf1322', 'cpf14243', 'cpf12'], 50.00,'universidade federal fluminense');
+end;
 $$;
 
 
--- Deve falhar pois tem mais de 4 passageiros
-DO $$
-BEGIN
-    PERFORM criaCorrida(ARRAY['cpf1', 'cpf1322', 'cpf14243', 'cpf12', 'cpf13'], 50.00, 'Universidade Federal Fluminense');
-END;
+-- deve falhar pois tem mais de 4 passageiros
+do $$
+begin
+    perform criacorrida(array['cpf1', 'cpf1322', 'cpf14243', 'cpf12', 'cpf13'], 50.00, 'universidade federal fluminense');
+end;
 $$;
 
--- Deve falhar pois não tem passageiros
-DO $$
-BEGIN
-    PERFORM criaCorrida('{}', 50.00, 'Universidade Federal Fluminense');
-END;
-$$;
-
-
-
--- Deve criar corrida com sucesso;
-DO $$
-BEGIN
-    PERFORM criaCorrida(ARRAY[ 'cpf12', 'cpf13'], 50.00, 'Universidade Federal Fluminense');
-END;
+-- deve falhar pois não tem passageiros
+do $$
+begin
+    perform criacorrida('{}', 50.00, 'universidade federal fluminense');
+end;
 $$;
 
 
 
--- View 1:
-CREATE VIEW detalhesCorridas AS SELECT
+-- deve criar corrida com sucesso;
+do $$
+begin
+    perform criacorrida(array[ 'cpf12', 'cpf13'], 50.00, 'universidade federal fluminense');
+end;
+$$;
+
+
+
+-- view 1:
+create view detalhescorridas as select
       c.nro_corrida,
-    c.cpf_motorista AS motorista_cpf,
+    c.cpf_motorista as motorista_cpf,
     c.destino,
-    SUM(c.preco_passageiro) AS preco_da_corrida,
-    CASE
-        WHEN hora_fim < hora_inicio THEN (hora_fim - hora_inicio) + INTERVAL '24 hours'
-        ELSE (hora_fim - hora_inicio)
-    END AS duracao,
-    COUNT(pc.cpf) AS quantidade_passageiro,
+    sum(c.preco_passageiro) as preco_da_corrida,
+    case
+        when hora_fim < hora_inicio then (hora_fim - hora_inicio) + interval '24 hours'
+        else (hora_fim - hora_inicio)
+    end as duracao,
+    count(pc.cpf) as quantidade_passageiro,
     array_agg(pc.cpf) as passageiros,
     ac.avaliacao,
     ac.comentario,
     m2.tipo_pagamento  
-FROM
+from
     corrida c
-JOIN
-    motorista m ON c.cpf_motorista = m.cpf
-JOIN
-    passageirocorrida pc ON c.nro_corrida = pc.nro_corrida
-JOIN
-    passageiro p2 ON pc.cpf = p2.cpf
+join
+    motorista m on c.cpf_motorista = m.cpf
+join
+    passageirocorrida pc on c.nro_corrida = pc.nro_corrida
+join
+    passageiro p2 on pc.cpf = p2.cpf
 join pagamentocorrida p on p.nro_corrida = c.nro_corrida
 join metodopagamento m2 on m2.id_pagamento = p.metodo_pagamento 
-LEFT JOIN
-    avaliacaocorrida ac ON c.nro_corrida = ac.nro_corrida
-GROUP BY
+left join
+    avaliacaocorrida ac on c.nro_corrida = ac.nro_corrida
+group by
     c.nro_corrida, c.cpf_motorista, c.destino, hora_fim, hora_inicio, ac.avaliacao, ac.comentario, m2.tipo_pagamento 
 order by nro_corrida;
 
 
 
--- View 2
-CREATE OR REPLACE VIEW corridasEmAndamento AS SELECT 
-   m.cpf AS cpf__motorista,
-    m.conta_corrente AS conta_corrente_motorista,
+-- view 2
+create or replace view corridasemandamento as select 
+   m.cpf as cpf__motorista,
+    m.conta_corrente as conta_corrente_motorista,
     c.nro_corrida,
     c.hora_inicio,
     c.data_inicio,
     c.destino,
-    array_agg(pc.cpf) AS quantidade_passageiros
-FROM
+    array_agg(pc.cpf) as quantidade_passageiros
+from
     motorista m
-JOIN
-    pessoa p ON m.cpf = p.cpf
-JOIN
-    corrida c ON m.cpf = c.cpf_motorista
-JOIN
-    passageirocorrida pc ON c.nro_corrida = pc.nro_corrida
-JOIN
-    passageiro p_pass ON pc.cpf = p_pass.cpf
-WHERE
-    c.data_fim IS NULL
+join
+    pessoa p on m.cpf = p.cpf
+join
+    corrida c on m.cpf = c.cpf_motorista
+join
+    passageirocorrida pc on c.nro_corrida = pc.nro_corrida
+join
+    passageiro p_pass on pc.cpf = p_pass.cpf
+where
+    c.data_fim is null
 group by m.cpf,c.nro_corrida;
