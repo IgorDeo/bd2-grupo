@@ -31,7 +31,6 @@ nome varchar(100),
 cep varchar(8)
 );
 
-
 create table veiculo(
 renavam char(9) primary key,
 cnpj char(14),
@@ -46,8 +45,8 @@ numero varchar(20),
 foreign key(cpf) references motorista(cpf));
 
 create table corrida(
-nro_corrida int primary key,
-cpf char(11), --Cpf motorista
+nro_corrida serial primary key,
+cpf char(11), 
 hora_inicio time,
 hora_fim time,
 preco_passageiro float,
@@ -79,7 +78,6 @@ foreign key (nro_corrida) references corrida(nro_corrida)
 
 
 -- Novas tabelas
-
 create table suporteatendente(
 nro_corrida int primary key,
 cpf char(11),
@@ -154,8 +152,6 @@ create table pagamentocorrida(
 );
 
 
-
-
 create table apolice(
 	nr_apolice int,
 	valor_apolice float,
@@ -221,6 +217,10 @@ insert into passageiro (cpf, cartao_credito) values ('cpf7', '123456');
 insert into passageiro (cpf, cartao_credito) values ('cpf8', '654321');
 insert into passageiro (cpf, cartao_credito) values ('cpf9', '987654');
 insert into passageiro (cpf, cartao_credito) values ('cpf11', '123123');
+insert into passageiro (cpf, cartao_credito) values ('cpf12', '123456');
+insert into passageiro (cpf, cartao_credito) values ('cpf13', '654321');
+insert into passageiro (cpf, cartao_credito) values ('cpf14', '987654');
+insert into passageiro (cpf, cartao_credito) values ('cpf15', '123123');
 
 
 insert into seguradora(cnpj, telefone, nome, cep) values ('cnpj1','21', 'seguradora1','20540');
@@ -246,16 +246,16 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam9', 'cnpj3', 'cpf7', '2013', '2013-09-09', 26000.00, 'marca9', 'caracteristica9', 'modelo9',  'numero9');
 insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam10', 'cnpj3', 'cpf8', '2012', '2012-10-10', 23000.00, 'marca10', 'caracteristica10', 'modelo10',  'numero10');
 
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (1, 'cpf1', '09:23:17', '09:43:34', 50.00, '2022-01-01', '2022-01-01', 'destino 1');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (2, 'cpf1', '10:03:22', '10:33:42', 45.00, '2022-02-02', '2022-02-02', 'destino 2');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (3, 'cpf2', '23:50:27', '01:12:34', 32.00, '2022-01-01', '2022-01-02','destino 3');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (4, 'cpf2', '02:22:13', '02:43:01', 24.00, '2022-01-02', '2022-01-02', 'destino 4');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (5, 'cpf2', '02:50:02', '03:05:43', 50.00, '2022-01-02', '2022-01-02', 'destino 5');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (6, 'cpf2', '03:23:17', '03:33:34', 55.00, '2022-01-02', '2022-01-02', 'destino 6');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (7, 'cpf3', '16:23:22', '16:35:34', 54.00, '2022-03-03', '2022-03-03', 'destino 7');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (8, 'cpf3', '16:53:17', '17:23:34', 23.00, '2022-03-03', '2022-03-03', 'destino 8');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (9, 'cpf3', '17:50:17', '18:23:34', 17.00, '2022-03-03', '2022-03-03', 'destino 9');
-insert into corrida (nro_corrida, cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values (10, 'cpf4', '12:23:17', '13:01:34', 25.00, '2022-03-03', '2022-03-03', 'destino 10');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '09:23:17', '09:43:34', 50.00, '2022-01-01', '2022-01-01', 'destino 1');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '10:03:22', '10:33:42', 45.00, '2022-02-02', '2022-02-02', 'destino 2');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '23:50:27', '01:12:34', 32.00, '2022-01-01', '2022-01-02','destino 3');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:22:13', '02:43:01', 24.00, '2022-01-02', '2022-01-02', 'destino 4');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:50:02', '03:05:43', 50.00, '2022-01-02', '2022-01-02', 'destino 5');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '03:23:17', '03:33:34', 55.00, '2022-01-02', '2022-01-02', 'destino 6');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:23:22', '16:35:34', 54.00, '2022-03-03', '2022-03-03', 'destino 7');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:53:17', '17:23:34', 23.00, '2022-03-03', '2022-03-03', 'destino 8');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '17:50:17', '18:23:34', 17.00, '2022-03-03', '2022-03-03', 'destino 9');
+insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf4', '12:23:17', '13:01:34', 25.00, '2022-03-03', '2022-03-03', 'destino 10');
 
 insert into passageirocorrida (nro_corrida, cpf) values (1, 'cpf4');
 insert into passageirocorrida (nro_corrida, cpf) values (1, 'cpf3');
@@ -381,14 +381,7 @@ JOIN motorista ON c.cpf = motorista.cpf
 WHERE motorista.cpf = 'cpf3'
 GROUP BY motorista.cpf;
 
-
-
 CREATE INDEX idx_passageirocorrida_nro_corrida ON passageirocorrida using hash(nro_corrida);
-C
-
-
-
-
 
 
 --Consulta 2 e seus indices
@@ -628,6 +621,101 @@ EXECUTE PROCEDURE validaAvaliacao();
 
 
 
+
+
+
+	
+CREATE OR REPLACE FUNCTION passageiroExiste(cpf_passageiro TEXT) RETURNS BOOLEAN AS $$
+DECLARE
+    existe BOOLEAN;
+BEGIN
+
+    SELECT EXISTS (SELECT 1 FROM passageiro WHERE cpf = cpf_passageiro) INTO existe;
+
+    RETURN existe;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+CREATE OR REPLACE FUNCTION criaCorrida(cpf_passageiros TEXT[], valor_passageiro FLOAT, destino TEXT) RETURNS VOID AS $$
+DECLARE
+    len_lista INT;
+    errs TEXT[] := '{}';
+    motorista_corrida motorista%rowtype;
+    nro_nova_corrida INT;
+BEGIN 
+    len_lista := array_length(cpf_passageiros, 1);
+   
+   	if len_lista > 4 then
+   		raise exception 'Uma corrida não pode ter mais de 4 passageiros';
+   	end if;
+
+    -- Para cada CPF na lista de passageiros, verificar se o passageiro está cadastrado
+    FOR i IN 1..len_lista LOOP
+        IF NOT passageiroExiste(cpf_passageiros[i]) then
+            errs := errs || FORMAT('%s', cpf_passageiros[i]);
+        END IF;
+    END LOOP;
+
+    -- Se algum deles não for passageiro, acontecerá um erro
+    IF array_length(errs, 1) > 0 THEN
+        RAISE EXCEPTION 'CPFs não encontrados: %', errs;
+    END IF;
+
+    -- Seleciona um motorista aleatoriamente para a corrida
+    SELECT * FROM motorista INTO motorista_corrida
+    ORDER BY RANDOM()
+    LIMIT 1;
+
+
+    INSERT INTO corrida (cpf, hora_inicio, preco_passageiro, data_inicio, destino)
+    VALUES (motorista_corrida.cpf, CURRENT_TIME, valor_passageiro, current_date, destino)
+    RETURNING nro_corrida INTO nro_nova_corrida;
+
+    FOR i IN 1..len_lista LOOP
+        INSERT INTO passageirocorrida (nro_corrida, cpf)
+        VALUES (nro_nova_corrida, cpf_passageiros[i]);
+    END LOOP;
+
+
+
+    RAISE NOTICE 'Corrida nro: % criada com sucesso. Boa viagem!', nro_nova_corrida;
+
+
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+-- Deve falhar pois cpf1 não é um passageiro
+DO $$
+BEGIN
+    PERFORM criaCorrida(ARRAY['cpf1', 'cpf1322', 'cpf14243', 'cpf12'], 50.00,'Universidade Federal Fluminense');
+END;
+$$;
+
+
+-- Deve falhar pois tem mais de 4 passageiros
+DO $$
+BEGIN
+    PERFORM criaCorrida(ARRAY['cpf1', 'cpf1322', 'cpf14243', 'cpf12', 'cpf13'], 50.00, 'Universidade Federal Fluminense');
+END;
+$$;
+
+
+
+-- Deve criar corrida com sucesso;
+DO $$
+BEGIN
+    PERFORM criaCorrida(ARRAY[ 'cpf12', 'cpf13'], 50.00, 'Universidade Federal Fluminense');
+END;
+$$;
+
+select * from corrida;
+select * from passageirocorrida;
 
 
 
