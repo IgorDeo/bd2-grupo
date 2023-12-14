@@ -591,6 +591,7 @@ EXECUTE PROCEDURE verificaCupom();
 
 --procedure + trigger
 -- impedir carros que naot em uma apolice ativa de serem inseridos
+
 create or replace
 function validarSeguro()
 returns trigger as $$
@@ -634,6 +635,10 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 
 
 ---FALTA DUAS QUERYS 3 PROCEDURES 2 VIEWS
+
+-- PROCEDURE DE VEICULO DEVE TER QUE ALTERAR A TABELA DE VEICULO PARA FAZE FUNCIONAR.
+
+
 
 
 
