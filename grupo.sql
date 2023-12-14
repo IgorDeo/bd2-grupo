@@ -550,7 +550,7 @@ returns trigger as $$
 declare
     data_expiracao promocao.data_fim%type;
 
-cod_promocao promocao.codigo%type;
+	cod_promocao promocao.codigo%type;
 
 begin
 	cod_promocao := new.codigo_promocao;
@@ -583,45 +583,54 @@ BEFORE INSERT OR UPDATE ON pagamentocorrida FOR EACH ROW
 EXECUTE PROCEDURE verificaCupom();
 
 --procedure + trigger
+-- impedir carros que naot em uma apolice ativa de serem inseridos
 
 create or replace
-function validaAvaliacao()()
+function validarSeguro()
 returns trigger as $$
 declare
-    data_expiracao promocao.data_fim%type;
-
-cod_promocao promocao.codigo%type;
+    seguro_valido apolice.vigencia_ano%type;
+	renavam_carro veiculo.renavam%type; 
+	
 
 begin
-	cod_promocao := new.codigo_promocao;
+	seguro_valido := new.vigencia_ano;
+	renavam_carro := new.renavam;
 
 select
-	data_fim
+	vigencia_ano 
 into
-	data_expiracao
+	seguro_valido
 from
-	promocao
-where
-	promocao.codigo = cod_promocao;
+	apolice a
+join veiculo v on a.renavam_veiculo = v.renavam
+where v.renavam = renavam_carro;
 
-if data_expiracao is null then
-        raise exception 'Cupom inválido';
 
-elsif data_expiracao < CURRENT_DATE then
-        raise exception 'Cupom expirado';
+if vigencia_ano is null then
+        raise exception 'Apolice nao encontrada';
+
+elsif vigencia_ano < EXTRACT(YEAR FROM CURRENT_DATE) then
+        raise exception 'PERIGO!!!! SEU SEGURO VENCEU!';
 end if;
 
 return new;
 end;
+$$ language plpgsql;
 
-CREATE or replace TRIGGER triggerValidaAvaliacao
-BEFORE INSERT OR UPDATE ON avaliacaocorrida FOR EACH ROW
-EXECUTE PROCEDURE validaAvaliacao();
-
-
-
+CREATE or replace TRIGGER triggerValidarSeguro
+BEFORE INSERT OR UPDATE ON veiculo FOR EACH ROW
+EXECUTE PROCEDURE validarSeguro();
 
 
+insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam11', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
+
+
+
+---FALTA DUAS QUERYS 3 PROCEDURES 2 VIEWS
+-- PROCEDURE DE VEICULO DEVE TER QUE ALTERAR A TABELA DE VEICULO PARA FAZE FUNCIONAR.
+--CRIAR PROCEDURE PARA CRIAR VEICULO JUNTO DE UMA APOLICE
+--CRIAR TRIGGER E PROCEDURE PARA ATUALIZAR MEDIA DE AVALIACAO 
 
 
 	
