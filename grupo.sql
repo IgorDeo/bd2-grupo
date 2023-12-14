@@ -633,19 +633,6 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 --CRIAR TRIGGER E PROCEDURE PARA ATUALIZAR MEDIA DE AVALIACAO 
 
 
-	
-CREATE OR REPLACE FUNCTION passageiroExiste(cpf_passageiro TEXT) RETURNS BOOLEAN AS $$
-DECLARE
-    existe BOOLEAN;
-BEGIN
-
-    SELECT EXISTS (SELECT 1 FROM passageiro WHERE cpf = cpf_passageiro) INTO existe;
-
-    RETURN existe;
-END;
-$$ LANGUAGE plpgsql;
-
-
 
 CREATE OR REPLACE FUNCTION criaCorrida(cpf_passageiros TEXT[], valor_passageiro FLOAT, destino TEXT) RETURNS VOID AS $$
 DECLARE
@@ -659,6 +646,11 @@ BEGIN
    	if len_lista > 4 then
    		raise exception 'Uma corrida não pode ter mais de 4 passageiros';
    	end if;
+   
+  	if len_lista = 0 or len_lista is null then
+   		raise exception 'Uma corrida precisa de pelo menos um passageiro';
+   	end if;
+
 
     -- Para cada CPF na lista de passageiros, verificar se o passageiro está cadastrado
     FOR i IN 1..len_lista LOOP
@@ -711,6 +703,13 @@ $$;
 DO $$
 BEGIN
     PERFORM criaCorrida(ARRAY['cpf1', 'cpf1322', 'cpf14243', 'cpf12', 'cpf13'], 50.00, 'Universidade Federal Fluminense');
+END;
+$$;
+
+-- Deve falhar pois não tem passageiros
+DO $$
+BEGIN
+    PERFORM criaCorrida('{}', 50.00, 'Universidade Federal Fluminense');
 END;
 $$;
 
