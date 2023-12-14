@@ -548,44 +548,90 @@ LIMIT 3;
 
 
 
---Procedures
 
-CREATE TRIGGER triggerVerificaCupom
+--procedure + trigger	
+
+create or replace
+function verificaCupom()
+returns trigger as $$
+declare
+    data_expiracao promocao.data_fim%type;
+
+cod_promocao promocao.codigo%type;
+
+begin
+	cod_promocao := new.codigo_promocao;
+
+select
+	data_fim
+into
+	data_expiracao
+from
+	promocao
+where
+	promocao.codigo = cod_promocao;
+
+if data_expiracao is null then
+        raise exception 'Cupom inválido';
+
+elsif data_expiracao < CURRENT_DATE then
+        raise exception 'Cupom expirado';
+end if;
+
+return new;
+end;
+
+$$ language plpgsql;
+
+
+
+CREATE or replace TRIGGER triggerVerificaCupom
 BEFORE INSERT OR UPDATE ON pagamentocorrida FOR EACH ROW
 EXECUTE PROCEDURE verificaCupom();
 
+--procedure + trigger
 
-CREATE OR REPLACE FUNCTION verificaCupom()
-RETURNS TRIGGER AS $$
-DECLARE
-    data_expiracao promocao.data_fim%TYPE;
-    numero_c pagamentocorrida.nro_corrida%TYPE;
-    cpf_p pagamentocorrida.cpf_passageiro%TYPE;
-BEGIN
-    numero_c := NEW.nro_corrida;
-    cpf_p := NEW.cpf_passageiro;
+create or replace
+function validaAvaliacao()()
+returns trigger as $$
+declare
+    data_expiracao promocao.data_fim%type;
 
-    SELECT data_fim INTO data_expiracao
-    FROM promocao
-    JOIN pagamentocorrida pc ON pc.codigo_promocao = promocao.codigo
-    WHERE pc.nro_corrida = numero_c AND pc.cpf_passageiro = cpf_p;
+cod_promocao promocao.codigo%type;
 
-    IF data_expiracao IS NULL THEN
-        RAISE Exception 'Cupom inválido';
-    ELSIF data_expiracao < CURRENT_DATE THEN
-        RAISE exception 'Cupom expirado';
-    END IF;
+begin
+	cod_promocao := new.codigo_promocao;
 
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+select
+	data_fim
+into
+	data_expiracao
+from
+	promocao
+where
+	promocao.codigo = cod_promocao;
 
-INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf5', 10, 15.0, 'cod2', 2, 1, '2023-01-03 14:30:00');
+if data_expiracao is null then
+        raise exception 'Cupom inválido';
 
- SELECT data_fim,  pc.codigo_promocao
-    FROM promocao
-    JOIN pagamentocorrida pc ON pc.codigo_promocao = promocao.codigo
-    WHERE pc.nro_corrida = 2 AND pc.cpf_passageiro = 'cpf3';
-   
-   select * from promocao;
+elsif data_expiracao < CURRENT_DATE then
+        raise exception 'Cupom expirado';
+end if;
+
+return new;
+end;
+
+CREATE or replace TRIGGER triggerValidaAvaliacao
+BEFORE INSERT OR UPDATE ON avaliacaocorrida FOR EACH ROW
+EXECUTE PROCEDURE validaAvaliacao();
+
+
+
+
+
+
+
+
+
+
   
