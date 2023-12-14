@@ -46,14 +46,14 @@ foreign key(cpf) references motorista(cpf));
 
 create table corrida(
 nro_corrida serial primary key,
-cpf char(11), 
+cpf_motorista char(11), 
 hora_inicio time,
 hora_fim time,
 preco_passageiro float,
 data_inicio date,
 data_fim date,
 destino varchar(100),
-foreign key (cpf) references motorista(cpf)
+foreign key (cpf_motorista) references motorista(cpf)
 );
 
 create table questionamento(
@@ -159,6 +159,7 @@ create table apolice(
 	cnpj_seguradora varchar(14),
 	renavam_veiculo varchar(9),
 	primary key (nr_apolice),
+	foreign key (renavam_veiculo) references veiculo(renavam),
 	foreign key (cnpj_seguradora) references seguradora(cnpj)
 );
 
@@ -245,16 +246,16 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam9', 'cnpj3', 'cpf7', '2013', '2013-09-09', 26000.00, 'marca9', 'caracteristica9', 'modelo9',  'numero9');
 insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam10', 'cnpj3', 'cpf8', '2012', '2012-10-10', 23000.00, 'marca10', 'caracteristica10', 'modelo10',  'numero10');
 
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '09:23:17', '09:43:34', 50.00, '2022-01-01', '2022-01-01', 'destino 1');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '10:03:22', '10:33:42', 45.00, '2022-02-02', '2022-02-02', 'destino 2');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '23:50:27', '01:12:34', 32.00, '2022-01-01', '2022-01-02','destino 3');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:22:13', '02:43:01', 24.00, '2022-01-02', '2022-01-02', 'destino 4');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:50:02', '03:05:43', 50.00, '2022-01-02', '2022-01-02', 'destino 5');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '03:23:17', '03:33:34', 55.00, '2022-01-02', '2022-01-02', 'destino 6');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:23:22', '16:35:34', 54.00, '2022-03-03', '2022-03-03', 'destino 7');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:53:17', '17:23:34', 23.00, '2022-03-03', '2022-03-03', 'destino 8');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '17:50:17', '18:23:34', 17.00, '2022-03-03', '2022-03-03', 'destino 9');
-insert into corrida (cpf, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf4', '12:23:17', '13:01:34', 25.00, '2022-03-03', '2022-03-03', 'destino 10');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '09:23:17', '09:43:34', 50.00, '2022-01-01', '2022-01-01', 'destino 1');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf1', '10:03:22', '10:33:42', 45.00, '2022-02-02', '2022-02-02', 'destino 2');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '23:50:27', '01:12:34', 32.00, '2022-01-01', '2022-01-02','destino 3');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:22:13', '02:43:01', 24.00, '2022-01-02', '2022-01-02', 'destino 4');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '02:50:02', '03:05:43', 50.00, '2022-01-02', '2022-01-02', 'destino 5');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf2', '03:23:17', '03:33:34', 55.00, '2022-01-02', '2022-01-02', 'destino 6');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:23:22', '16:35:34', 54.00, '2022-03-03', '2022-03-03', 'destino 7');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '16:53:17', '17:23:34', 23.00, '2022-03-03', '2022-03-03', 'destino 8');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf3', '17:50:17', '18:23:34', 17.00, '2022-03-03', '2022-03-03', 'destino 9');
+insert into corrida (cpf_motorista, hora_inicio, hora_fim, preco_passageiro, data_inicio, data_fim, destino) values ('cpf4', '12:23:17', '13:01:34', 25.00, '2022-03-03', '2022-03-03', 'destino 10');
 
 insert into passageirocorrida (nro_corrida, cpf) values (1, 'cpf4');
 insert into passageirocorrida (nro_corrida, cpf) values (1, 'cpf3');
@@ -306,10 +307,9 @@ INSERT INTO tipos_avaliador (id_tipo, descricao) VALUES(2, 'Motorista');
 
 -- Inserção na tabela avaliacaocorrida
 INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (1, 'cpf4', 1, 4, 'Ótima corrida');
-
-INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (2, 'cpf5', 2, 5, 'Motorista muito educado');
-
+INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (2, 'cpf5', 2, 5, 'Passageiro muito educado');
 INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (3, 'cpf6', 1, 3, 'Corrida com atraso');
+INSERT INTO avaliacaocorrida (nro_corrida, cpf_avaliador, tipo_avaliador, avaliacao, comentario) VALUES (4, 'cpf12', 1, 3, 'Corrida com atraso');
 
 
 -- Inserção na tabela localizacaoveiculo
@@ -322,7 +322,6 @@ INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, l
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (4,3, '2023-01-01 10:00:00', -49.550520, -26.633308);
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (5,3, '2023-01-01 10:15:00', -50.545743, -27.636815);
 INSERT INTO localizacaoveiculo (id_localizacao, nro_corrida, momento_registro, latitude, longitude) VALUES (6, 3, '2023-01-02 08:30:00', -51.567383, -28.654244);
-
 
 
 -- Inserção na tabela promocao
@@ -348,9 +347,6 @@ INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promoca
 INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf4', 6, 30.0, 'cod1', 1, 1, '2023-01-02 12:00:00');
 INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf3', 7, 25.0, 'cod2', 3, 2, NULL);
 INSERT INTO pagamentocorrida (cpf_passageiro, nro_corrida, valor, codigo_promocao, metodo_pagamento, status_pagamento, data_pagamento) VALUES ('cpf8', 8, 15.0, NULL, 2, 1, '2023-01-03 14:30:00');
-
-
-
 
 
 
@@ -518,7 +514,7 @@ SELECT
 FROM
     motorista p
 JOIN motorista m ON p.cpf = m.cpf
-JOIN corrida c ON m.cpf = c.cpf
+JOIN corrida c ON m.cpf = c.cpf_motorista
 JOIN MotoristaAvaliacao ma ON m.cpf = ma.cpf_motorista
 GROUP BY
     p.cpf, p.nome, ma.media_avaliacao
@@ -529,18 +525,19 @@ LIMIT 3;
 
 
 
---consulta 10
-
-
-
-
-
-
-
-
-
-
-
+--consulta 10: média de avaliacao de todos os motoristas
+SELECT
+    c.cpf_motorista AS cpf_motorista,
+    AVG(ac.avaliacao) AS media_avaliacao
+FROM
+    corrida c
+JOIN
+    avaliacaocorrida ac ON c.nro_corrida = ac.nro_corrida
+                      AND ac.tipo_avaliador = 1 -- Assuming id_tipo '1' corresponds to Passageiro
+GROUP BY
+    c.cpf_motorista;
+   
+ select * from avaliacaocorrida;   
 --procedure + trigger	
 
 create or replace
@@ -548,8 +545,7 @@ function verificaCupom()
 returns trigger as $$
 declare
     data_expiracao promocao.data_fim%type;
-
-	cod_promocao promocao.codigo%type;
+    cod_promocao promocao.codigo%type;
 
 begin
 	cod_promocao := new.codigo_promocao;
@@ -574,16 +570,50 @@ return new;
 end;
 
 $$ language plpgsql;
+
+
+
 CREATE or replace TRIGGER triggerVerificaCupom
 BEFORE INSERT OR UPDATE ON pagamentocorrida FOR EACH ROW
 EXECUTE PROCEDURE verificaCupom();
 
----FALTA DUAS QUERYS 3 PROCEDURES 2 VIEWS
--- PROCEDURE DE VEICULO DEVE TER QUE ALTERAR A TABELA DE VEICULO PARA FAZE FUNCIONAR.
---CRIAR PROCEDURE PARA CRIAR VEICULO JUNTO DE UMA APOLICE
---CRIAR TRIGGER E PROCEDURE PARA ATUALIZAR MEDIA DE AVALIACAO 
+--procedure + trigger
 
+create or replace
+function validaAvaliacao()()
+returns trigger as $$
+declare
+    data_expiracao promocao.data_fim%type;
 
+cod_promocao promocao.codigo%type;
+
+begin
+	cod_promocao := new.codigo_promocao;
+
+select
+	data_fim
+into
+	data_expiracao
+from
+	promocao
+where
+	promocao.codigo = cod_promocao;
+
+if data_expiracao is null then
+        raise exception 'Cupom inválido';
+
+elsif data_expiracao < CURRENT_DATE then
+        raise exception 'Cupom expirado';
+end if;
+
+return new;
+end;
+
+CREATE or replace TRIGGER triggerValidaAvaliacao
+BEFORE INSERT OR UPDATE ON avaliacaocorrida FOR EACH ROW
+EXECUTE PROCEDURE validaAvaliacao();
+
+	
 CREATE OR REPLACE FUNCTION passageiroExiste(cpf_passageiro TEXT) RETURNS BOOLEAN AS $$
 DECLARE
     existe BOOLEAN;
@@ -594,7 +624,6 @@ BEGIN
     RETURN existe;
 END;
 $$ LANGUAGE plpgsql;
-
 
 
 CREATE OR REPLACE FUNCTION criaCorrida(cpf_passageiros TEXT[], valor_passageiro FLOAT, destino TEXT) RETURNS VOID AS $$
@@ -633,7 +662,7 @@ BEGIN
     LIMIT 1;
 
 
-    INSERT INTO corrida (cpf, hora_inicio, preco_passageiro, data_inicio, destino)
+    INSERT INTO corrida (cpf_motorista, hora_inicio, preco_passageiro, data_inicio, destino)
     VALUES (motorista_corrida.cpf, CURRENT_TIME, valor_passageiro, current_date, destino)
     RETURNING nro_corrida INTO nro_nova_corrida;
 
@@ -685,59 +714,60 @@ BEGIN
 END;
 $$;
 
-select * from corrida;
-select * from passageirocorrida;
 
 
-create or replace
-function validarSeguro()
-returns trigger as $$
-declare
-    renavam_carro  veiculo.renavam%type;
-	vigencia_apolice apolice.vigencia_ano%type;   	
-begin
-	renavam_carro := new.renavam;
-	
-select
-	vigencia_ano
-from
-	apolice
-	into vigencia_apolice
-where
-	apolice.renavam_veiculo = renavam_carro;
-
-if vigencia_apolice is null then
-        raise exception 'Nao podemos criar um carro sem uma apolice de seguro';
-
-elsif vigencia_apolice < EXTRACT(YEAR FROM CURRENT_DATE) then
-        raise exception 'Apolice expirada viculo precisa estar com a apolice em dia';
-end if;
-return new;
-end;
-$$ language plpgsql;
-
-
-
-CREATE or replace TRIGGER triggerValidarSeguro
-BEFORE INSERT OR UPDATE ON veiculo FOR EACH ROW
-EXECUTE PROCEDURE validarSeguro();
-
---deve falhar pois nao existe apolice valida para o renavam deste veiculo
-insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam11', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
-
---deve falhar pois o ano de vigencia e menor que a data atual
-insert into apolice (nr_apolice,valor_apolice,vigencia_ano,cnpj_seguradora,renavam_veiculo) values(13,2000,2020,'cnpj2','renavam22');
-insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam22', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
-
---Deve funcionar pois a apolice esta com a vigencia em dia
-insert into apolice (nr_apolice,valor_apolice,vigencia_ano,cnpj_seguradora,renavam_veiculo) values(15,2000,2023,'cnpj2','renavam14');
-insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam14', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
+-- View 1:
+CREATE VIEW detalhesCorridas AS SELECT
+      c.nro_corrida,
+    c.cpf_motorista AS motorista_cpf,
+    c.destino,
+    SUM(c.preco_passageiro) AS preco_da_corrida,
+    CASE
+        WHEN hora_fim < hora_inicio THEN (hora_fim - hora_inicio) + INTERVAL '24 hours'
+        ELSE (hora_fim - hora_inicio)
+    END AS duracao,
+    COUNT(pc.cpf) AS quantidade_passageiro,
+    array_agg(pc.cpf) as passageiros,
+    ac.avaliacao,
+    ac.comentario,
+    m2.tipo_pagamento  
+FROM
+    corrida c
+JOIN
+    motorista m ON c.cpf_motorista = m.cpf
+JOIN
+    passageirocorrida pc ON c.nro_corrida = pc.nro_corrida
+JOIN
+    passageiro p2 ON pc.cpf = p2.cpf
+join pagamentocorrida p on p.nro_corrida = c.nro_corrida
+join metodopagamento m2 on m2.id_pagamento = p.metodo_pagamento 
+LEFT JOIN
+    avaliacaocorrida ac ON c.nro_corrida = ac.nro_corrida
+GROUP BY
+    c.nro_corrida, c.cpf_motorista, c.destino, hora_fim, hora_inicio, ac.avaliacao, ac.comentario, m2.tipo_pagamento 
+order by nro_corrida;
 
 
 
-
-
-
-
-
-
+-- View 2
+CREATE OR REPLACE VIEW corridasEmAndamento AS SELECT 
+   m.cpf AS cpf__motorista,
+    m.conta_corrente AS conta_corrente_motorista,
+    c.nro_corrida,
+    c.hora_inicio,
+    c.data_inicio,
+    c.destino,
+    array_agg(pc.cpf) AS quantidade_passageiros
+FROM
+    motorista m
+JOIN
+    pessoa p ON m.cpf = p.cpf
+JOIN
+    corrida c ON m.cpf = c.cpf_motorista
+JOIN
+    passageirocorrida pc ON c.nro_corrida = pc.nro_corrida
+JOIN
+    passageiro p_pass ON pc.cpf = p_pass.cpf
+WHERE
+    c.data_fim IS NULL
+group by m.cpf,c.nro_corrida;
