@@ -683,7 +683,7 @@ end;
 $$;
 
 create or replace
-function validarSeguro()
+function validarseguro()
 returns trigger as $$
 declare
     renavam_carro  veiculo.renavam%type;
@@ -700,10 +700,10 @@ where
 	apolice.renavam_veiculo = renavam_carro;
 
 if vigencia_apolice is null then
-        raise exception 'Nao podemos criar um carro sem uma apolice de seguro';
+        raise exception 'nao podemos criar um carro sem uma apolice de seguro';
 
-elsif vigencia_apolice < EXTRACT(YEAR FROM CURRENT_DATE) then
-        raise exception 'Apolice expirada viculo precisa estar com a apolice em dia';
+elsif vigencia_apolice < extract(year from current_date) then
+        raise exception 'apolice expirada viculo precisa estar com a apolice em dia';
 end if;
 return new;
 end;
@@ -711,9 +711,9 @@ $$ language plpgsql;
 
 
 
-CREATE or replace TRIGGER triggerValidarSeguro
-BEFORE INSERT OR UPDATE ON veiculo FOR EACH ROW
-EXECUTE PROCEDURE validarSeguro();
+create or replace trigger triggervalidarseguro
+before insert or update on veiculo for each row
+execute procedure validarseguro();
 
 --deve falhar pois nao existe apolice valida para o renavam deste veiculo
 insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracteristica, modelo,  numero) values ('renavam11', 'cnpj1', 'cpf1', '2021', '2021-01-01', 25000.00, 'marca1', 'caracteristica1', 'modelo1',  'numero1');
@@ -725,6 +725,36 @@ insert into veiculo (renavam, cnpj, cpf, ano, data_compra, preco, marca, caracte
 --Deve funcionar pois a apolice esta com a vigencia em dia
 insert into apolice (nr_apolice,valor_apolice,vigencia_ano,cnpj_seguradora,renavam_veiculo) values(13,2000,2020,'cnpj2','renavam14');
 
+
+create or replace function pagarcorrida(n_cpf_passageiro text, n_nro_corrida int, n_codigo_promocao text, n_metodo_pagamento int) returns void as $$
+declare
+    valor_pago float;
+   	valor_original float;
+   	desconto_cupom float; 	
+begin	
+	select desconto into desconto_cupom from promocao p where p.codigo = n_codigo_promocao;
+	select preco_passageiro into valor_original from corrida c where c.nro_corrida = n_nro_corrida;
+	perform p.cpf from corrida c join passageirocorrida p on p.nro_corrida = c.nro_corrida where p.cpf = n_cpf_passageiro and c.nro_corrida = n_nro_corrida;
+	if not found then
+		raise exception 'passageiro % nao participou da corrida %', n_cpf_passageiro, n_nro_corrida;
+	end if;
+
+	valor_pago := valor_original;
+	if desconto_cupom >= 0 then
+		valor_pago := valor_original * (1 - (desconto_cupom/100));
+	end if;
+	
+	insert into pagamentocorrida (cpf_passageiro, nro_corrida, codigo_promocao, metodo_pagamento, valor) values (n_cpf_passageiro, n_nro_corrida, n_codigo_promocao, n_metodo_pagamento, valor_pago);   
+	
+	raise notice 'pagamento criado com sucesso';
+end;
+$$ language plpgsql;
+
+do $$
+begin
+    perform pagarcorrida('cpf12', 11, 'cod1',1);
+end;
+$$;
 
 
 -- view 1:
