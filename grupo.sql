@@ -538,7 +538,7 @@ join
 group by
     c.cpf_motorista;
    
- select * from avaliacaocorrida;   
+
 --procedure + trigger	
 
 create or replace

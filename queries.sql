@@ -1,4 +1,4 @@
--consultas
+--consultas
 
 
 --consulta 1 e seus indices
