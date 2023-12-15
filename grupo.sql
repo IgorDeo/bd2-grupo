@@ -492,35 +492,36 @@ create index idx_pagamentocorrida_nro_corrida on pagamentocorrida using hash(nro
 create index idx_pagamentocorrida_id_status on pagamentocorrida using hash(status_pagamento);
 create index idx_pagamentocorrida_codigo on pagamentocorrida using hash(codigo_promocao);
 
-
 --consulta 9
-with motoristaavaliacao as (
-    select
-        m.cpf as cpf_motorista,
-        avg(ac.avaliacao) as media_avaliacao
-    from
-        motorista m
-    join avaliacaocorrida ac on m.cpf = ac.cpf_avaliador
-    where
-        ac.tipo_avaliador = 2
-    group by
-        m.cpf
-)
 select
-    p.cpf,
-    p.nome,
-    ma.media_avaliacao,
-    count(c.nro_corrida) as total_corridas
+    cast(t1.ticket_medio as numeric(10, 2)) as ticket_medio,
+    t2.duracao_media
 from
-    motorista p
-join motorista m on p.cpf = m.cpf
-join corrida c on m.cpf = c.cpf_motorista
-join motoristaavaliacao ma on m.cpf = ma.cpf_motorista
-group by
-    p.cpf, p.nome, ma.media_avaliacao
-order by
-    ma.media_avaliacao desc
-limit 3;
+    (
+        select
+            round(avg(preco_passageiro)::numeric, 2) as ticket_medio
+        from
+            corrida
+        join
+            passageirocorrida on corrida.nro_corrida = passageirocorrida.nro_corrida
+    ) as t1
+cross join
+    (
+        select
+            avg(duracao) as duracao_media
+        from
+            (
+                select
+                    extract(epoch from (
+                        case
+                            when hora_fim < hora_inicio then (hora_fim - hora_inicio) + interval '24 hours'
+                            else (hora_fim - hora_inicio)
+                        end
+                    )) / 3600 as duracao
+                from
+                    corrida
+            ) as d
+    ) as t2;
 
 
 
