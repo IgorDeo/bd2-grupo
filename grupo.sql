@@ -580,39 +580,6 @@ execute procedure verificacupom();
 
 --procedure + trigger
 
-create or replace
-function validaavaliacao()()
-returns trigger as $$
-declare
-    data_expiracao promocao.data_fim%type;
-
-cod_promocao promocao.codigo%type;
-
-begin
-	cod_promocao := new.codigo_promocao;
-
-select
-	data_fim
-into
-	data_expiracao
-from
-	promocao
-where
-	promocao.codigo = cod_promocao;
-
-if data_expiracao is null then
-        raise exception 'cupom inválido';
-
-elsif data_expiracao < current_date then
-        raise exception 'cupom expirado';
-end if;
-
-return new;
-end;
-
-create or replace trigger triggervalidaavaliacao
-before insert or update on avaliacaocorrida for each row
-execute procedure validaavaliacao();
 
 	
 create or replace function passageiroexiste(cpf_passageiro text) returns boolean as $$
